@@ -12,7 +12,7 @@ const jsonParser = bodyParser.json();
 app.use(express.static('public'));
 
 let db = null;
-let MONGO_URL = DB_URL;
+let MONGO_URL = process.env.MONGODB_URI ||  DB_URL;
 async function main() {
   //const DATABASE_NAME = 'final-db';
   //const MONGO_URL = `mongodb://localhost:27017/${DATABASE_NAME}`;
