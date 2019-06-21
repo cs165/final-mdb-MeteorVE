@@ -5,20 +5,31 @@ class SubmitSection{
         submitDiv.appendChild(submitBtn);
         submitBtn.onclick = () => {this.onSubmit();};
     }
-    onSubmit(){
+    async onSubmit(){
         var choosenProduct = document.querySelector(".product.choosen");
         console.log(choosenProduct);
         
         var choosenGameCase = document.querySelector(".gameCase.choosen");
-        let retJson = { product: choosenProduct.id, case: choosenGameCase.id};
-        console.log(retJson);
-        //const response = await fetch(info.path, info.options);
+        // For my self
+        // let retJson = { product: choosenProduct.id, case: choosenGameCase.id };
+        // For final project
+        let retJson = { product: choosenProduct.innerHTML, case: choosenGameCase.innerHTML};
         const options = {
-            method: "post"
+            method: "POST"
+        };
+        options.headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         };
         options.body = JSON.stringify(retJson);
-        var path = "https://mvform.herokuapp.com/record";
-        const response = await fetch(path, options)
+        //var path = "https://mvform.herokuapp.com/record";
+        var path = "/record";
+        console.log(retJson);
+        console.log(options);
+        
+        const response = await fetch(path, options);
+        
+        
         /*
         // Example 
         fetch('https://thawing-stream-74537.herokuapp.com/comments', { method: 'post' })

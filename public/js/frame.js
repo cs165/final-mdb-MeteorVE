@@ -10,17 +10,26 @@ class MainSection {
         const microSD = document.createElement('div');
         const dashboard = document.createElement('div');
         const submitDiv = document.createElement('div');
+        const queryDiv = document.createElement('div');
+
        
         product.id = 'productDiv';
         gameCase.id = 'gameCaseDiv';
         microSD.id = 'microSDDiv';
         submitDiv.id = "submitDiv";
+        queryDiv.id = "queryDiv";
+
 
         menu.appendChild(product); 
         menu.appendChild(gameCase); 
         //menu.appendChild(microSD); 
         menu.appendChild(dashboard); 
         menu.appendChild(submitDiv); 
+        menu.appendChild(queryDiv); 
+
+        const productP = document.createElement('p');
+        productP.textContent = "想買哪隻手機呢 ? \n";
+        product.appendChild(productP);
 
         const proBtn = document.createElement('button');
         const osBtn = document.createElement('button');
@@ -38,14 +47,15 @@ class MainSection {
         }
 
         
-        proBtn.innerHTML = "Pro";
+        proBtn.innerHTML = "S10+";
         proBtn.id = "pro";
-        osBtn.innerHTML = "Os";
+        osBtn.innerHTML = "S10";
         osBtn.id = "os";
 
 
         const gameContainer = new GameSection(gameCase);
         const submitContainer = new SubmitSection(submitDiv);
+        const queryContainer = new QuerySection(queryDiv);
 
         // const key = document.createElement('input');
         // key.type = 'text';

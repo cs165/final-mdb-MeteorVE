@@ -3,8 +3,13 @@ class GameSection{
         
         //this.toggleFunc = this.toggleFunc.bind(this);
 
-        var btnArr = [];
-        var caseNum = ["不需要", 5, 10, 20, 30];
+        //var caseNum = ["不需要", 5, 10, 20, 30];
+        var p = document.createElement('p');
+        p.textContent = "容量想要多少呢 ? \n";
+        gameCaseDiv.appendChild(p); 
+        
+        var caseNum = ["不需要", 64, 128, 256, 512];
+
         for(var i=0; i< 5; i++){
             var tmpBtn = document.createElement('button');
             if (caseNum[i] == "不需要")
