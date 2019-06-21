@@ -12,7 +12,7 @@ const jsonParser = bodyParser.json();
 app.use(express.static('public'));
 
 let db = null;
-let MONGO_URL = process.env.MONGODB_URI ||  DB_URL;
+let MONGO_URL = process.env.MONGODB_URI; // ||  DB_URL;
 async function main() {
   //const DATABASE_NAME = 'final-db';
   //const MONGO_URL = `mongodb://localhost:27017/${DATABASE_NAME}`;
@@ -35,6 +35,11 @@ async function main() {
 
 main();
 
+// dbName = "final";
+// collectionName = "record";
+dbName = "heroku_9nm329kz";
+collectionName = "record";
+
 
 app.post('/record', jsonParser, (req, res) => {
   console.log(req.body);
@@ -42,8 +47,8 @@ app.post('/record', jsonParser, (req, res) => {
   
   MongoClient.connect(MONGO_URL, function (err, db) {
     if (err) throw err;
-    var dbo = db.db("final");
-    dbo.collection("record").insertOne(req.body, function (err, res) {
+    var dbo = db.db(dbName);
+    dbo.collection(collectionName).insertOne(req.body, function (err, res) {
       if (err) throw err;
       console.log("1 document inserted");
       db.close();
@@ -64,9 +69,9 @@ app.get('/record', jsonParser, (req, res) => {
   //console.log(req.body);
   MongoClient.connect(MONGO_URL, function (err, db) {
     if (err) throw err;
-    var dbo = db.db("final");
+    var dbo = db.db(dbName);
     var mysort = { product: 1 , case: 1};
-    dbo.collection("record").find().sort(mysort).toArray(function (err, result) {
+    dbo.collection(collectionName).find().sort(mysort).toArray(function (err, result) {
       if (err) throw err;
       console.log(result);
       //res.send(req.body)
@@ -82,9 +87,9 @@ app.delete('/record', jsonParser, (req, res) => {
   //console.log(req.body);
   MongoClient.connect(MONGO_URL, function (err, db) {
     if (err) throw err;
-    var dbo = db.db("final");
+    var dbo = db.db(dbName);
     var myquery = {};
-    dbo.collection("record").deleteMany(myquery, function (err, obj) {
+    dbo.collection(collectionName).deleteMany(myquery, function (err, obj) {
       if (err) throw err;
       console.log(obj.result.n + " document(s) deleted");
       res.send("delete success");
