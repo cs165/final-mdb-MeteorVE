@@ -11,7 +11,11 @@ const jsonParser = bodyParser.json();
 
 app.use(express.static('public'));
 
-let db = null;
+// dbName = "final";
+// collectionName = "record";
+dbName = "heroku_9nm329kz";
+collectionName = "record";
+
 let MONGO_URL = process.env.MONGODB_URI; // ||  DB_URL;
 async function main() {
   //const DATABASE_NAME = 'final-db';
@@ -35,12 +39,6 @@ async function main() {
 
 main();
 
-// dbName = "final";
-// collectionName = "record";
-dbName = "heroku_9nm329kz";
-collectionName = "record";
-
-
 app.post('/record', jsonParser, (req, res) => {
   console.log(req.body);
   console.log(DB_URL);
@@ -54,11 +52,6 @@ app.post('/record', jsonParser, (req, res) => {
       db.close();
     });
   });
-  // db.collection('record').save(req.body, (err, result) => {
-  //   console.log(err);
-  //   if (err) return res.sendStatus(500);
-  //   res.send(req.body);
-  // });
 })
 
 ////////////////////////////////////////////////////////////////////////////////
